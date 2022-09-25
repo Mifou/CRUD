@@ -1,7 +1,6 @@
 package com.CrudDemo.crud.Campaign;
 
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/campaigns")
 public class CampaignsController {
-
 
 
     private final CampaignRepository campaignRepository;
@@ -31,18 +29,18 @@ public class CampaignsController {
     }
 
     @GetMapping("/{id}")
-    public Campaign getCampaign(@PathVariable Long id){
+    public Campaign getCampaign(@PathVariable Long id) {
         return campaignRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     @PostMapping
-    public ResponseEntity<Campaign> createCampaign(@RequestBody Campaign campaign) throws URISyntaxException{
-                Campaign savedCampaign = campaignRepository.save(campaign);
-                return ResponseEntity.created(new URI("'/campaigns/" + savedCampaign.getId())).body(savedCampaign);
+    public ResponseEntity<Campaign> createCampaign(@RequestBody Campaign campaign) throws URISyntaxException {
+        Campaign savedCampaign = campaignRepository.save(campaign);
+        return ResponseEntity.created(new URI("'/campaigns/" + savedCampaign.getId())).body(savedCampaign);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateCampaign(@PathVariable Long id, @RequestBody Campaign campaign){
+    public ResponseEntity updateCampaign(@PathVariable Long id, @RequestBody Campaign campaign) {
         Campaign currentCampaign = campaignRepository.findById(id).orElseThrow(RuntimeException::new);
 
         currentCampaign.setName(campaign.getName());
@@ -52,16 +50,15 @@ public class CampaignsController {
         currentCampaign.setRadius(campaign.getRadius());
         currentCampaign.setStatus(campaign.isStatus());
         currentCampaign.setTown(campaign.getTown());
-        campaignRepository.save(campaign);
+        currentCampaign = campaignRepository.save(currentCampaign);
 
         return ResponseEntity.ok(currentCampaign);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteCampaign(@PathVariable Long id){
+    public ResponseEntity deleteCampaign(@PathVariable Long id) {
         campaignRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
 
 }

@@ -23,7 +23,7 @@ public class Campaign {
 
     private String town;
 
-    private int radius;
+    private double radius;
 
     public Long getId() {
         return id;
@@ -81,11 +81,11 @@ public class Campaign {
         this.town = town;
     }
 
-    public int getRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public void setRadius(int radius) {
+    public void setRadius(double radius) {
         this.radius = radius;
     }
 

@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.math.BigDecimal;
 
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -50,18 +49,22 @@ public class CampaignControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(campaign)))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     void deleteCampaignTest() throws Exception {
-        
+        mvc.perform(MockMvcRequestBuilders.delete("/campaigns/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(campaign)))
+                .andExpect(status().isOk());
     }
 
     @Test
     void updateCampaignTest() throws Exception {
-
-
+        mvc.perform(MockMvcRequestBuilders.put("/campaigns/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(campaign)))
+                .andExpect(status().isOk());
     }
 
 
@@ -72,6 +75,4 @@ public class CampaignControllerTests {
             throw new RuntimeException(e);
         }
     }
-
-
 }
