@@ -52,6 +52,22 @@ public class CampaignControllerTests {
     }
 
     @Test
+    void getCampaignTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/campaigns/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(campaign)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void getCampaignsTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/campaigns")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(campaign)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void deleteCampaignTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/campaigns/1")
                 .contentType(MediaType.APPLICATION_JSON)
